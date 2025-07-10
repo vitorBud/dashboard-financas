@@ -7,7 +7,7 @@
 const pageConfig = {
     dashboard: {
         title: 'Dashboard',
-        url: 'dashboard.html',
+        url: 'index.html',
         icon: 'fas fa-home',
         description: 'Visão geral das suas finanças'
     },
