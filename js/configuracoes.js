@@ -34,10 +34,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // Campos de preferências
         currency: document.getElementById("currency"),
         language: document.getElementById("language"),
-        timezone: document.getElementById("timezone"),
-        darkMode: document.getElementById("dark-mode"),
-        emailReports: document.getElementById("email-reports"),
-        weeklySummary: document.getElementById("weekly-summary"),
+        theme: document.getElementById("theme"),
         startPage: document.getElementById("start-page"),
         
         // Campos de notificações
@@ -49,11 +46,11 @@ document.addEventListener("DOMContentLoaded", function() {
         budgetsApp: document.getElementById("budgets-app"),
         
         // Botões de ação
-        exportDataBtn: document.getElementById("export-data"),
-        importDataBtn: document.getElementById("import-data"),
-        importFileInput: document.getElementById("import-file"),
-        resetDataBtn: document.getElementById("reset-data"),
-        deleteAccountBtn: document.getElementById("delete-account")
+        exportDataBtn: document.getElementById("export-data-btn"),
+        importDataBtn: document.getElementById("import-data-btn"),
+        importFileInput: document.getElementById("import-data-input"),
+        resetDataBtn: document.getElementById("reset-data-btn"),
+        deleteAccountBtn: document.getElementById("delete-account-btn")
     };
     
     // ======================
@@ -93,10 +90,7 @@ document.addEventListener("DOMContentLoaded", function() {
             preferences: {
                 currency: "BRL",
                 language: "pt-BR",
-                timezone: "America/Sao_Paulo",
-                darkMode: false,
-                emailReports: true,
-                weeklySummary: true,
+                theme: "light",
                 startPage: "dashboard"
             },
             notifications: {
@@ -136,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function() {
         
         // Ativar aba selecionada
         const activeButton = document.querySelector(`[data-tab="${tabName}"]`);
-        const activeContent = document.getElementById(`${tabName}-tab`);
+        const activeContent = document.getElementById(tabName);
         
         if (activeButton) activeButton.classList.add("active");
         if (activeContent) activeContent.classList.add("active");
@@ -156,10 +150,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // Preferências
         if (DOM.currency) DOM.currency.value = userData.preferences?.currency || "BRL";
         if (DOM.language) DOM.language.value = userData.preferences?.language || "pt-BR";
-        if (DOM.timezone) DOM.timezone.value = userData.preferences?.timezone || "America/Sao_Paulo";
-        if (DOM.darkMode) DOM.darkMode.checked = userData.preferences?.darkMode || false;
-        if (DOM.emailReports) DOM.emailReports.checked = userData.preferences?.emailReports !== false;
-        if (DOM.weeklySummary) DOM.weeklySummary.checked = userData.preferences?.weeklySummary !== false;
+        if (DOM.theme) DOM.theme.value = userData.preferences?.theme || "light";
         if (DOM.startPage) DOM.startPage.value = userData.preferences?.startPage || "dashboard";
         
         // Notificações
@@ -237,10 +228,7 @@ document.addEventListener("DOMContentLoaded", function() {
         userData.preferences = {
             currency: DOM.currency?.value || "BRL",
             language: DOM.language?.value || "pt-BR",
-            timezone: DOM.timezone?.value || "America/Sao_Paulo",
-            darkMode: DOM.darkMode?.checked || false,
-            emailReports: DOM.emailReports?.checked || false,
-            weeklySummary: DOM.weeklySummary?.checked || false,
+            theme: DOM.theme?.value || "light",
             startPage: DOM.startPage?.value || "dashboard"
         };
         
@@ -248,7 +236,7 @@ document.addEventListener("DOMContentLoaded", function() {
         showAlert("Preferências salvas com sucesso!", "success");
         
         // Aplicar tema escuro se necessário
-        if (userData.preferences.darkMode) {
+        if (userData.preferences.theme === "dark") {
             document.body.classList.add("dark-theme");
         } else {
             document.body.classList.remove("dark-theme");
@@ -436,7 +424,8 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
         
-        if (!confirm("Digite 'EXCLUIR' para confirmar:") !== "EXCLUIR") {
+        const confirmation = prompt("Digite 'EXCLUIR' para confirmar:");
+        if (confirmation !== "EXCLUIR") {
             showAlert("Confirmação incorreta. Operação cancelada.", "info");
             return;
         }
@@ -510,7 +499,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         
         // Aplicar tema escuro se necessário
-        if (userData.preferences?.darkMode) {
+        if (userData.preferences?.theme === "dark") {
             document.body.classList.add("dark-theme");
         }
     }

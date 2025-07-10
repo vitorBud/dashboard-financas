@@ -10,33 +10,8 @@
 </head>
 <body>
     <div class="dashboard-container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <h1><i class="fas fa-chart-line"></i> Finanças</h1>
-            </div>
-            <nav class="sidebar-nav">
-                <ul>
-                    <li class="active"><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
-                    <li><a href="transacoes.html"><i class="fas fa-wallet"></i> Transações</a></li>
-                    <li><a href="orcamentos.html"><i class="fas fa-chart-pie"></i> Orçamentos</a></li>
-                    <li><a href="relatorios.html"><i class="fas fa-chart-bar"></i> Relatórios</a></li>
-                    <li><a href="categorias.html"><i class="fas fa-tags"></i> Categorias</a></li>
-                    <li><a href="alertas.html"><i class="fas fa-bell"></i> Alertas</a></li>
-                    <li><a href="configuracoes.html"><i class="fas fa-cog"></i> Configurações</a></li>
-                </ul>
-            </nav>
-            <div class="sidebar-footer">
-                <div class="user-profile">
-                    <img src="https://via.placeholder.com/40" alt="User">
-                    <div class="user-info">
-                        <span class="user-name">John Doe</span>
-                        <span class="user-email">john@example.com</span>
-                    </div>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-            </div>
-        </aside>
+        <!-- Sidebar será injetado aqui -->
+        <div id="sidebar-placeholder"></div>
 
         <!-- Main Content -->
         <main class="main-content">
@@ -200,7 +175,18 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/shared.js"></script>
     <script src="js/dashboard.js"></script>
+    <script>
+        // Carregar o sidebar
+        document.addEventListener("DOMContentLoaded", function() {
+            if (typeof FinanceApp !== "undefined" && typeof FinanceApp.loadSidebar === "function") {
+                FinanceApp.loadSidebar("dashboard");
+            } else {
+                console.error("FinanceApp ou FinanceApp.loadSidebar não está disponível.");
+            }
+        });
+    </script>
 </body>
 </html>
 

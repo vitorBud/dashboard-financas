@@ -4,297 +4,205 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finanças - Configurações</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/config.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="dashboard-container">
-        <!-- Sidebar -->
+        
         <div id="sidebar-placeholder"></div>
-
-        <!-- Main Content -->
+        
         <main class="main-content">
             <header class="main-header">
                 <div class="header-left">
                     <h2>Configurações</h2>
                 </div>
             </header>
-
-            <!-- Configurações -->
+            
             <section class="settings-section">
                 <div class="settings-tabs">
-                    <div class="settings-sidebar">
-                        <button class="settings-tab active" data-tab="profile"><i class="fas fa-user"></i> Perfil</button>
-                        <button class="settings-tab" data-tab="account"><i class="fas fa-lock"></i> Conta</button>
-                        <button class="settings-tab" data-tab="preferences"><i class="fas fa-sliders-h"></i> Preferências</button>
-                        <button class="settings-tab" data-tab="notifications"><i class="fas fa-bell"></i> Notificações</button>
-                        <button class="settings-tab" data-tab="backup"><i class="fas fa-database"></i> Backup</button>
-                    </div>
-                    
-                    <div class="settings-content">
-                        <!-- Perfil -->
-                        <div class="settings-pane active" id="profile-pane">
+                    <button class="tab-button active" data-tab="profile">Perfil</button>
+                    <button class="tab-button" data-tab="account">Conta</button>
+                    <button class="tab-button" data-tab="preferences">Preferências</button>
+                    <button class="tab-button" data-tab="notifications">Notificações</button>
+                    <button class="tab-button" data-tab="data">Dados</button>
+                </div>
                 
-                            <h3>Perfil do Usuário</h3>
-                            
-                            <!-- Container de alertas (será preenchido pelo JavaScript) -->
-                            <div id="profile-alert" class="alert" style="display: none;"></div>
-                            
-                            <form id="profile-form">
-                                <!-- Grupo de campos de informações básicas -->
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="profile-name">Nome Completo</label>
-                                        <input type="text" id="profile-name" placeholder="Seu nome completo" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="profile-email">E-mail</label>
-                                        <input type="email" id="profile-email" placeholder="seu@email.com" required>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="profile-phone">Telefone</label>
-                                        <input type="tel" id="profile-phone" placeholder="(00) 00000-0000">
-                                        <small class="form-hint">Formato: (DDD) 99999-9999</small>
-                                    </div>
-                                </div>
-                                
-                                <!-- Upload de avatar com preview -->
-                                <div class="form-group">
-                                    <label>Foto de Perfil</label>
-                                    <div class="avatar-upload-container">
-                                        <div class="avatar-preview-container">
-                                            <img src="image/defaultimg.png" alt="Sua foto de perfil" 
-                                                id="profile-avatar-preview" class="avatar-preview">
-                                            <div class="avatar-overlay">
-                                                <i class="fas fa-camera"></i>
-                                            </div>
-                                            <input type="file" id="profile-avatar" accept="image/png, image/jpeg" 
-                                                class="avatar-input">
-                                        </div>
-                                        <div class="avatar-actions">
-                                            <label for="profile-avatar" class="btn btn-outline">
-                                                <i class="fas fa-upload"></i> Alterar Foto
-                                            </label>
-                                            <button type="button" id="remove-avatar" class="btn btn-outline btn-danger">
-                                                <i class="fas fa-trash"></i> Remover
-                                            </button>
-                                            <small class="form-hint">Formatos suportados: JPG, PNG (Máx. 2MB)</small>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Ações do formulário -->
-                                <div class="form-actions">
-                                    <button type="button" id="cancel-profile-changes" class="btn btn-outline">
-                                        Cancelar
-                                    </button>
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="fas fa-save"></i> Salvar Alterações
-                                    </button>
-                                </div>
-                            </form>
+                <div class="tab-content active" id="profile">
+                    <h3>Perfil do Usuário</h3>
+                    <form id="profile-form">
+                        <div class="form-group">
+                            <label for="profile-name">Nome:</label>
+                            <input type="text" id="profile-name" required>
                         </div>
-                        
-                        <!-- Conta -->
-                        <div class="settings-pane" id="account-pane">
-                            <h3>Configurações da Conta</h3>
-                            <form id="account-form">
-                                <div class="form-group">
-                                    <label for="account-currency">Moeda Principal</label>
-                                    <select id="account-currency">
-                                        <option value="BRL" selected>Real Brasileiro (R$)</option>
-                                        <option value="USD">Dólar Americano ($)</option>
-                                        <option value="EUR">Euro (€)</option>
-                                        <option value="GBP">Libra Esterlina (£)</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="account-language">Idioma</label>
-                                    <select id="account-language">
-                                        <option value="pt-BR" selected>Português (Brasil)</option>
-                                        <option value="en-US">Inglês (EUA)</option>
-                                        <option value="es-ES">Espanhol</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="account-timezone">Fuso Horário</label>
-                                    <select id="account-timezone">
-                                        <option value="America/Sao_Paulo" selected>Brasília (UTC-3)</option>
-                                        <option value="UTC">UTC</option>
-                                        <option value="America/New_York">Nova York (UTC-5)</option>
-                                        <option value="Europe/London">Londres (UTC+0)</option>
-                                    </select>
-                                </div>
-                                <div class="form-actions">
-                                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-                                </div>
-                            </form>
-                            
-                            <div class="danger-zone">
-                                <h4>Zona de Perigo</h4>
-                                <button class="btn btn-danger" id="change-password">
-                                    <i class="fas fa-key"></i> Alterar Senha
-                                </button>
-                                <button class="btn btn-danger" id="delete-account">
-                                    <i class="fas fa-trash"></i> Excluir Conta
-                                </button>
+                        <div class="form-group">
+                            <label for="profile-email">Email:</label>
+                            <input type="email" id="profile-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-phone">Telefone:</label>
+                            <input type="tel" id="profile-phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-avatar">Avatar:</label>
+                            <input type="file" id="profile-avatar" accept="image/*">
+                            <img id="avatar-preview" src="image/defaultimg.png" alt="Avatar Preview" class="avatar-preview">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Salvar Perfil</button>
+                    </form>
+                </div>
+                
+                <div class="tab-content" id="account">
+                    <h3>Configurações da Conta</h3>
+                    <form id="account-form">
+                        <div class="form-group">
+                            <label for="current-password">Senha Atual:</label>
+                            <input type="password" id="current-password">
+                        </div>
+                        <div class="form-group">
+                            <label for="new-password">Nova Senha:</label>
+                            <input type="password" id="new-password">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm-password">Confirmar Nova Senha:</label>
+                            <input type="password" id="confirm-password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Alterar Senha</button>
+                    </form>
+                    <div class="danger-zone">
+                        <h4>Zona de Perigo</h4>
+                        <button class="btn btn-danger" id="delete-account-btn">Excluir Conta</button>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="preferences">
+                    <h3>Preferências</h3>
+                    <form id="preferences-form">
+                        <div class="form-group">
+                            <label for="currency">Moeda:</label>
+                            <select id="currency">
+                                <option value="BRL">Real Brasileiro (R$)</option>
+                                <option value="USD">Dólar Americano ($)</option>
+                                <option value="EUR">Euro (€)</option>
+                                <option value="GBP">Libra Esterlina (£)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="language">Idioma:</label>
+                            <select id="language">
+                                <option value="pt-BR">Português (Brasil)</option>
+                                <option value="en-US">English (US)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="theme">Tema:</label>
+                            <select id="theme">
+                                <option value="light">Claro</option>
+                                <option value="dark">Escuro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="start-page">Página Inicial:</label>
+                            <select id="start-page">
+                                <option value="dashboard">Dashboard</option>
+                                <option value="transacoes">Transações</option>
+                                <option value="orcamentos">Orçamentos</option>
+                                <option value="relatorios">Relatórios</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Salvar Preferências</button>
+                    </form>
+                </div>
+                
+                <div class="tab-content" id="notifications">
+                    <h3>Notificações</h3>
+                    <form id="notifications-form">
+                        <div class="form-section">
+                            <h4>Alertas</h4>
+                            <div class="form-group checkbox-group">
+                                <input type="checkbox" id="alerts-email">
+                                <label for="alerts-email">Receber alertas por email</label>
+                            </div>
+                            <div class="form-group checkbox-group">
+                                <input type="checkbox" id="alerts-app">
+                                <label for="alerts-app">Receber alertas no aplicativo</label>
                             </div>
                         </div>
                         
-                        <!-- Preferências -->
-                        <div class="settings-pane" id="preferences-pane">
-                            <h3>Preferências do Sistema</h3>
-                            <form id="preferences-form">
-                                <div class="form-group">
-                                    <label>
-                                        <input type="checkbox" id="pref-dark-mode"> Modo Escuro
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label>
-                                        <input type="checkbox" id="pref-email-reports" checked> Receber relatórios por e-mail
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label>
-                                        <input type="checkbox" id="pref-weekly-summary" checked> Resumo semanal
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label for="pref-start-page">Página Inicial</label>
-                                    <select id="pref-start-page">
-                                        <option value="dashboard">Dashboard</option>
-                                        <option value="transactions">Transações</option>
-                                        <option value="budgets">Orçamentos</option>
-                                    </select>
-                                </div>
-                                <div class="form-actions">
-                                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-                                </div>
-                            </form>
+                        <div class="form-section">
+                            <h4>Transações</h4>
+                            <div class="form-group checkbox-group">
+                                <input type="checkbox" id="transactions-email">
+                                <label for="transactions-email">Notificar transações por email</label>
+                            </div>
+                            <div class="form-group checkbox-group">
+                                <input type="checkbox" id="transactions-app">
+                                <label for="transactions-app">Notificar transações no aplicativo</label>
+                            </div>
                         </div>
                         
-                        <!-- Notificações -->
-                        <div class="settings-pane" id="notifications-pane">
-                            <h3>Configurações de Notificação</h3>
-                            <form id="notifications-form">
-                                <div class="form-group">
-                                    <h4>Alertas</h4>
-                                    <label>
-                                        <input type="checkbox" id="notif-alerts-email" checked> Receber alertas por e-mail
-                                    </label>
-                                    <label>
-                                        <input type="checkbox" id="notif-alerts-app" checked> Receber alertas no aplicativo
-                                    </label>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <h4>Transações</h4>
-                                    <label>
-                                        <input type="checkbox" id="notif-transactions-email"> Notificar por e-mail
-                                    </label>
-                                    <label>
-                                        <input type="checkbox" id="notif-transactions-app" checked> Notificar no aplicativo
-                                    </label>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <h4>Orçamentos</h4>
-                                    <label>
-                                        <input type="checkbox" id="notif-budgets-email" checked> Avisar quando próximo do limite
-                                    </label>
-                                    <label>
-                                        <input type="checkbox" id="notif-budgets-app" checked> Avisar quando ultrapassar o limite
-                                    </label>
-                                </div>
-                                
-                                <div class="form-actions">
-                                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-                                </div>
-                            </form>
+                        <div class="form-section">
+                            <h4>Orçamentos</h4>
+                            <div class="form-group checkbox-group">
+                                <input type="checkbox" id="budgets-email">
+                                <label for="budgets-email">Notificar orçamentos por email</label>
+                            </div>
+                            <div class="form-group checkbox-group">
+                                <input type="checkbox" id="budgets-app">
+                                <label for="budgets-app">Notificar orçamentos no aplicativo</label>
+                            </div>
                         </div>
                         
-                        <!-- Backup -->
-                        <div class="settings-pane" id="backup-pane">
-                            <h3>Backup e Restauração</h3>
-                            <div class="backup-options">
-                                <div class="backup-card">
-                                    <i class="fas fa-file-export"></i>
-                                    <h4>Exportar Dados</h4>
-                                    <p>Exporte todos os seus dados para um arquivo JSON</p>
-                                    <button class="btn btn-primary" id="export-data">
-                                        <i class="fas fa-download"></i> Exportar
-                                    </button>
-                                </div>
-                                
-                                <div class="backup-card">
-                                    <i class="fas fa-file-import"></i>
-                                    <h4>Importar Dados</h4>
-                                    <p>Importe dados de um arquivo JSON anteriormente exportado</p>
-                                    <input type="file" id="import-file" accept=".json" style="display: none;">
-                                    <label for="import-file" class="btn btn-secondary">
-                                        <i class="fas fa-upload"></i> Importar
-                                    </label>
-                                </div>
-                                
-                                <div class="backup-card">
-                                    <i class="fas fa-cloud"></i>
-                                    <h4>Backup Automático</h4>
-                                    <p>Ative o backup automático na nuvem</p>
-                                    <label class="switch">
-                                        <input type="checkbox" id="auto-backup">
-                                        <span class="slider"></span>
-                                    </label>
-                                </div>
-                            </div>
-                            
-                            <div class="danger-zone">
-                                <h4>Zona de Perigo</h4>
-                                <button class="btn btn-danger" id="reset-data">
-                                    <i class="fas fa-trash"></i> Limpar Todos os Dados
-                                </button>
-                            </div>
+                        <button type="submit" class="btn btn-primary">Salvar Notificações</button>
+                    </form>
+                </div>
+                
+                <div class="tab-content" id="data">
+                    <h3>Gerenciamento de Dados</h3>
+                    <div class="data-actions">
+                        <div class="action-group">
+                            <h4>Backup</h4>
+                            <p>Exporte todos os seus dados financeiros para um arquivo JSON.</p>
+                            <button class="btn btn-secondary" id="export-data-btn">
+                                <i class="fas fa-download"></i> Exportar Dados
+                            </button>
+                        </div>
+                        
+                        <div class="action-group">
+                            <h4>Importação</h4>
+                            <p>Importe dados de um arquivo JSON previamente exportado.</p>
+                            <input type="file" id="import-data-input" accept=".json" style="display: none;">
+                            <button class="btn btn-secondary" id="import-data-btn">
+                                <i class="fas fa-upload"></i> Importar Dados
+                            </button>
+                        </div>
+                        
+                        <div class="action-group danger-zone">
+                            <h4>Reset</h4>
+                            <p>Apague todos os dados financeiros. Esta ação não pode ser desfeita.</p>
+                            <button class="btn btn-danger" id="reset-data-btn">
+                                <i class="fas fa-trash"></i> Resetar Todos os Dados
+                            </button>
                         </div>
                     </div>
                 </div>
             </section>
         </main>
     </div>
-
-    <!-- Modal de Alteração de Senha -->
-    <div class="modal" id="password-modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2>Alterar Senha</h2>
-            <form id="password-form">
-                <div class="form-group">
-                    <label for="current-password">Senha Atual</label>
-                    <input type="password" id="current-password" required>
-                </div>
-                <div class="form-group">
-                    <label for="new-password">Nova Senha</label>
-                    <input type="password" id="new-password" required>
-                </div>
-                <div class="form-group">
-                    <label for="confirm-password">Confirmar Nova Senha</label>
-                    <input type="password" id="confirm-password" required>
-                </div>
-                <div class="form-actions">
-                    <button type="button" class="btn btn-secondary" id="cancel-password">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Alterar Senha</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <script src="js/configuracoes.js"></script>
-    <script src="js/navigation.js"></script>
+    
     <script src="js/shared.js"></script>
+    <script src="js/configuracoes.js"></script>
+    <script>
+        // Carregar o sidebar
+        document.addEventListener("DOMContentLoaded", function() {
+            if (typeof FinanceApp !== "undefined" && typeof FinanceApp.loadSidebar === "function") {
+                FinanceApp.loadSidebar("configuracoes");
+            } else {
+                console.error("FinanceApp ou FinanceApp.loadSidebar não está disponível.");
+            }
+        });
+    </script>
 </body>
 </html>
-
 

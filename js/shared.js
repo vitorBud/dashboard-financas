@@ -98,6 +98,17 @@ function loadUserProfile() {
     if (userAvatarEl) userAvatarEl.src = userData.avatar;
 }
 
+// Função para atualizar perfil do usuário no sidebar
+function updateUserProfile(userData) {
+    const userNameEl = document.querySelector(".user-name");
+    const userEmailEl = document.querySelector(".user-email");
+    const userAvatarEl = document.querySelector(".user-profile-img");
+    
+    if (userNameEl) userNameEl.textContent = userData.name;
+    if (userEmailEl) userEmailEl.textContent = userData.email;
+    if (userAvatarEl) userAvatarEl.src = userData.avatar;
+}
+
 // ======================
 // Sistema de Dados Financeiros
 // ======================
@@ -368,6 +379,10 @@ function closeModal(modalId) {
 
 // Event listeners globais
 document.addEventListener("DOMContentLoaded", function() {
+    // Carregar sidebar automaticamente
+    const currentPage = getCurrentPage();
+    loadSidebar(currentPage);
+    
     // Fechar modais ao clicar fora
     window.addEventListener("click", function(event) {
         if (event.target.classList.contains("modal")) {
@@ -393,6 +408,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 closeModal(modal.id);
             }
         }
+    });
+    
+    // Listener para atualizações de perfil
+    window.addEventListener("profileUpdated", function(event) {
+        updateUserProfile(event.detail);
     });
 });
 
@@ -420,6 +440,7 @@ window.FinanceApp = {
     loadSidebar,
     getUserData,
     saveUserData,
+    updateUserProfile,
     getCategories,
     saveCategories,
     getTransactions,

@@ -35,12 +35,6 @@ const pageConfig = {
         icon: 'fas fa-tags',
         description: 'Organize suas transações por categoria'
     },
-    alertas: {
-        title: 'Alertas',
-        url: 'alertas.html',
-        icon: 'fas fa-bell',
-        description: 'Configure notificações financeiras'
-    },
     configuracoes: {
         title: 'Configurações',
         url: 'configuracoes.html',
@@ -237,8 +231,7 @@ const keyboardShortcuts = {
     'Alt+3': 'orcamentos',
     'Alt+4': 'relatorios',
     'Alt+5': 'categorias',
-    'Alt+6': 'alertas',
-    'Alt+7': 'configuracoes'
+    'Alt+6': 'configuracoes'
 };
 
 // Função para configurar atalhos de teclado
