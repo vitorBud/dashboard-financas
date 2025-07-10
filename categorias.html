@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finanças - Categorias</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div id="sidebar-placeholder"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <div class="header-left">
+                    <h2>Categorias</h2>
+                </div>
+                <div class="header-right">
+                    <button class="btn btn-primary" id="add-category">
+                        <i class="fas fa-plus"></i> Nova Categoria
+                    </button>
+                </div>
+            </header>
+
+            <!-- Categorias -->
+            <section class="categories-section">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="income">Receitas</button>
+                    <button class="tab-btn" data-tab="expense">Despesas</button>
+                </div>
+
+                <div class="tab-content active" id="income-categories">
+                    <div class="categories-list" id="income-categories-list">
+                        <!-- Preenchido por JavaScript -->
+                    </div>
+                </div>
+
+                <div class="tab-content" id="expense-categories">
+                    <div class="categories-list" id="expense-categories-list">
+                        <!-- Preenchido por JavaScript -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal de Categoria -->
+    <div class="modal" id="category-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="modal-category-title">Nova Categoria</h2>
+            <form id="category-form">
+                <div class="form-group">
+                    <label for="category-name">Nome</label>
+                    <input type="text" id="category-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="category-type">Tipo</label>
+                    <select id="category-type" required>
+                        <option value="">Selecione...</option>
+                        <option value="income">Receita</option>
+                        <option value="expense">Despesa</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="category-color">Cor</label>
+                    <input type="color" id="category-color" value="#4361ee">
+                </div>
+                <div class="form-group">
+                    <label for="category-icon">Ícone</label>
+                    <div class="icon-selector">
+                        <i class="fas fa-home icon-option" data-icon="home"></i>
+                        <i class="fas fa-utensils icon-option" data-icon="utensils"></i>
+                        <i class="fas fa-car icon-option" data-icon="car"></i>
+                        <i class="fas fa-heartbeat icon-option" data-icon="heartbeat"></i>
+                        <i class="fas fa-shopping-cart icon-option" data-icon="shopping-cart"></i>
+                        <i class="fas fa-film icon-option" data-icon="film"></i>
+                        <i class="fas fa-graduation-cap icon-option" data-icon="graduation-cap"></i>
+                        <i class="fas fa-money-bill-wave icon-option" data-icon="money-bill-wave"></i>
+                    </div>
+                    <input type="hidden" id="category-icon" value="tag">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-category">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/shared.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/categorias.js"></script>
+    <script>
+        // Carregar o sidebar
+        document.addEventListener("DOMContentLoaded", function() {
+            FinanceApp.loadSidebar("categorias");
+        });
+    </script>
+</body>
+</html>
+
+

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finanças - Orçamentos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div id="sidebar-placeholder"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <div class="header-left">
+                    <h2>Orçamentos</h2>
+                    <div class="period-selector">
+                        <select id="budget-period">
+                            <option value="monthly">Mensal</option>
+                            <option value="quarterly">Trimestral</option>
+                            <option value="yearly">Anual</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <button class="btn btn-primary" id="add-budget">
+                        <i class="fas fa-plus"></i> Criar Orçamento
+                    </button>
+                </div>
+            </header>
+
+            <!-- Resumo de Orçamentos -->
+            <section class="summary-cards">
+                <div class="card">
+                    <div class="card-icon budget">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-title">Total Orçado</span>
+                        <span class="card-value" id="total-budgeted">R$ 0,00</span>
+                        <span class="card-change">Este mês</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon spent">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-title">Total Gasto</span>
+                        <span class="card-value" id="total-spent">R$ 0,00</span>
+                        <span class="card-change">Este mês</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon remaining">
+                        <i class="fas fa-piggy-bank"></i>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-title">Total Restante</span>
+                        <span class="card-value" id="total-remaining">R$ 0,00</span>
+                        <span class="card-change">Este mês</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon utilization">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-title">Utilização</span>
+                        <span class="card-value" id="utilization-rate">0%</span>
+                        <span class="card-change">Este mês</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lista de Orçamentos -->
+            <section class="budgets-section">
+                <div class="section-header">
+                    <h3>Meus Orçamentos</h3>
+                    <div class="section-actions">
+                        <button class="btn btn-text" id="sort-budgets">
+                            <i class="fas fa-sort"></i> Ordenar
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="budgets-list" id="budgets-list">
+                    <!-- Preenchido por JavaScript -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal de Orçamento -->
+    <div class="modal" id="budget-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="modal-budget-title">Criar Orçamento</h2>
+            <form id="budget-form">
+                <div class="form-group">
+                    <label for="budget-category">Categoria</label>
+                    <select id="budget-category" required>
+                        <option value="">Selecione...</option>
+                        <!-- Preenchido por JavaScript -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="budget-amount">Valor</label>
+                    <input type="number" id="budget-amount" step="0.01" min="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="budget-period">Período</label>
+                    <select id="budget-period" required>
+                        <option value="monthly">Mensal</option>
+                        <option value="quarterly">Trimestral</option>
+                        <option value="yearly">Anual</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-budget">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/shared.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/orcamentos.js"></script>
+    <script>
+        // Carregar o sidebar
+        document.addEventListener('DOMContentLoaded', function() {
+            FinanceApp.loadSidebar('orcamentos');
+        });
+    </script>
+</body>
+</html>
+

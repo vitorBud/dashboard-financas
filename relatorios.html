@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finanças - Relatórios</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div id="sidebar-placeholder"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <div class="header-left">
+                    <h2>Relatórios</h2>
+                    <div class="period-selector">
+                        <select id="report-period">
+                            <option value="this-month">Este Mês</option>
+                            <option value="last-month">Mês Anterior</option>
+                            <option value="this-year">Este Ano</option>
+                            <option value="last-year">Ano Anterior</option>
+                            <option value="custom">Personalizado</option>
+                        </select>
+                        <div id="custom-report-dates" style="display: none;">
+                            <input type="date" id="report-start-date">
+                            <span>até</span>
+                            <input type="date" id="report-end-date">
+                        </div>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <button class="btn btn-primary" id="generate-report">
+                        <i class="fas fa-file-pdf"></i> Gerar PDF
+                    </button>
+                    <button class="btn btn-secondary" id="export-report">
+                        <i class="fas fa-file-excel"></i> Exportar Excel
+                    </button>
+                </div>
+            </header>
+
+            <!-- Gráficos de Relatórios -->
+            <section class="reports-section">
+                <div class="report-filters">
+                    <div class="filter-group">
+                        <label for="report-type">Tipo de Relatório:</label>
+                        <select id="report-type">
+                            <option value="cashflow">Fluxo de Caixa</option>
+                            <option value="expenses">Despesas por Categoria</option>
+                            <option value="income">Receitas por Categoria</option>
+                            <option value="budgets">Desempenho de Orçamentos</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-text" id="apply-filters">
+                        <i class="fas fa-filter"></i> Aplicar Filtros
+                    </button>
+                </div>
+
+                <div class="report-container">
+                    <div class="report-chart">
+                        <canvas id="main-report-chart"></canvas>
+                    </div>
+                    <div class="report-summary">
+                        <h3>Resumo</h3>
+                        <div class="summary-item">
+                            <span>Total de Receitas</span>
+                            <span id="total-income">R$ 0,00</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Total de Despesas</span>
+                            <span id="total-expense">R$ 0,00</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Saldo</span>
+                            <span id="report-balance">R$ 0,00</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Economias</span>
+                            <span id="report-savings">R$ 0,00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="report-details">
+                    <h3>Detalhes</h3>
+                    <table class="report-table">
+                        <thead>
+                            <tr>
+                                <th>Categoria</th>
+                                <th>Receitas</th>
+                                <th>Despesas</th>
+                                <th>Saldo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="report-details-body">
+                            <!-- Preenchido por JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/relatorios.js"></script>
+    <script>
+        // Carregar o sidebar
+        document.addEventListener("DOMContentLoaded", function() {
+            FinanceApp.loadSidebar("relatorios");
+        });
+    </script>
+</body>
+</html>
+
+

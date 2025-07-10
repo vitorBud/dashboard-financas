@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finanças - Transações</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div id="sidebar-placeholder"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <div class="header-left">
+                    <h2>Transações</h2>
+                    <div class="date-selector">
+                        <button id="prev-month"><i class="fas fa-chevron-left"></i></button>
+                        <span id="current-month">Julho 2023</span>
+                        <button id="next-month"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Pesquisar transações...">
+                    </div>
+                    <button class="btn btn-primary" id="add-transaction">
+                        <i class="fas fa-plus"></i> Adicionar Transação
+                    </button>
+                    <button class="btn btn-secondary" id="export-transactions">
+                        <i class="fas fa-file-export"></i> Exportar
+                    </button>
+                </div>
+            </header>
+
+            <!-- Filtros -->
+            <section class="filters-section">
+                <div class="filter-group">
+                    <label for="transaction-type-filter">Tipo:</label>
+                    <select id="transaction-type-filter">
+                        <option value="all">Todos</option>
+                        <option value="income">Receitas</option>
+                        <option value="expense">Despesas</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="category-filter">Categoria:</label>
+                    <select id="category-filter">
+                        <option value="all">Todas</option>
+                        
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="date-range-filter">Período:</label>
+                    <select id="date-range-filter">
+                        <option value="this-month">Este mês</option>
+                        <option value="last-month">Mês anterior</option>
+                        <option value="this-year">Este ano</option>
+                        <option value="custom">Personalizado</option>
+                    </select>
+                </div>
+                <div class="filter-group" id="custom-date-range" style="display: none;">
+                    <label for="start-date">De:</label>
+                    <input type="date" id="start-date">
+                    <label for="end-date">Até:</label>
+                    <input type="date" id="end-date">
+                </div>
+                <button class="btn btn-text" id="clear-filters">
+                    <i class="fas fa-times"></i> Limpar filtros
+                </button>
+            </section>
+
+            <!-- Tabela de Transações -->
+            <section class="data-section">
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Descrição</th>
+                                <th>Categoria</th>
+                                <th>Tipo</th>
+                                <th>Valor</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactions-table-body">
+                           
+                        </tbody>
+                    </table>
+                    <div class="table-footer">
+                        <div class="table-summary">
+                            <span>Total de transações: <strong id="total-transactions">0</strong></span>
+                            <span>Saldo: <strong id="transactions-balance">R$ 0,00</strong></span>
+                        </div>
+                        <div class="pagination">
+                            <button class="btn btn-text" id="prev-page" disabled>
+                                <i class="fas fa-chevron-left"></i> Anterior
+                            </button>
+                            <span id="page-info">Página 1 de 1</span>
+                            <button class="btn btn-text" id="next-page" disabled>
+                                Próxima <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal de Transação -->
+    <div class="modal" id="transaction-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="modal-transaction-title">Adicionar Transação</h2>
+            <form id="transaction-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="transaction-type">Tipo</label>
+                        <select id="transaction-type" required>
+                            <option value="">Selecione...</option>
+                            <option value="income">Receita</option>
+                            <option value="expense">Despesa</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="transaction-amount">Valor</label>
+                        <input type="number" id="transaction-amount" step="0.01" min="0.01" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="transaction-description">Descrição</label>
+                    <input type="text" id="transaction-description" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="transaction-category">Categoria</label>
+                        <select id="transaction-category" required>
+                            <option value="">Selecione...</option>
+                            <!-- Preenchido por JavaScript -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="transaction-date">Data</label>
+                        <input type="date" id="transaction-date" required>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-transaction">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/transacoes.js"></script>
+    <script>
+        // Carregar o sidebar
+        document.addEventListener("DOMContentLoaded", function() {
+            FinanceApp.loadSidebar("transacoes");
+        });
+    </script>
+</body>
+</html>
+
+

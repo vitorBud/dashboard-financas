@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finanças - Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1><i class="fas fa-chart-line"></i> Finanças</h1>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active"><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="transacoes.html"><i class="fas fa-wallet"></i> Transações</a></li>
+                    <li><a href="orcamentos.html"><i class="fas fa-chart-pie"></i> Orçamentos</a></li>
+                    <li><a href="relatorios.html"><i class="fas fa-chart-bar"></i> Relatórios</a></li>
+                    <li><a href="categorias.html"><i class="fas fa-tags"></i> Categorias</a></li>
+                    <li><a href="alertas.html"><i class="fas fa-bell"></i> Alertas</a></li>
+                    <li><a href="configuracoes.html"><i class="fas fa-cog"></i> Configurações</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <img src="https://via.placeholder.com/40" alt="User">
+                    <div class="user-info">
+                        <span class="user-name">John Doe</span>
+                        <span class="user-email">john@example.com</span>
+                    </div>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <div class="header-left">
+                    <h2>Dashboard</h2>
+                    <div class="date-selector">
+                        <button id="prev-month"><i class="fas fa-chevron-left"></i></button>
+                        <span id="current-month">Janeiro 2024</span>
+                        <button id="next-month"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <button class="btn btn-primary" id="add-transaction-btn">
+                        <i class="fas fa-plus"></i> Adicionar Transação
+                    </button>
+                </div>
+            </header>
+
+            <!-- Cards de Estatísticas -->
+            <section class="summary-cards">
+                <div class="card">
+                    <div class="card-icon balance">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-title">Saldo Atual</span>
+                        <span class="card-value" id="balance-value">R$ 0,00</span>
+                        <span class="card-change positive">+0%</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon income">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-title">Receitas do Mês</span>
+                        <span class="card-value" id="income-value">R$ 0,00</span>
+                        <span class="card-change positive">+0%</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon expense">
+                        <i class="fas fa-arrow-up"></i>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-title">Despesas do Mês</span>
+                        <span class="card-value" id="expense-value">R$ 0,00</span>
+                        <span class="card-change negative">+0%</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon savings">
+                        <i class="fas fa-piggy-bank"></i>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-title">Economia do Mês</span>
+                        <span class="card-value" id="savings-value">R$ 0,00</span>
+                        <span class="card-change positive">+0%</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gráficos -->
+            <section class="charts-section">
+                <div class="chart-container large">
+                    <div class="chart-header">
+                        <h3>Fluxo Financeiro Mensal</h3>
+                        <div class="chart-actions">
+                            <select id="chart-period">
+                                <option value="year">Este Ano</option>
+                                <option value="6months">Últimos 6 Meses</option>
+                                <option value="3months">Últimos 3 Meses</option>
+                            </select>
+                        </div>
+                    </div>
+                    <canvas id="cashflow-chart"></canvas>
+                </div>
+                <div class="chart-container small">
+                    <div class="chart-header">
+                        <h3>Distribuição de Despesas</h3>
+                    </div>
+                    <canvas id="expenses-chart"></canvas>
+                </div>
+            </section>
+
+            <!-- Dados -->
+            <section class="data-tables">
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3>Transações Recentes</h3>
+                        <a href="transacoes.html" class="btn btn-text">Ver Todas</a>
+                    </div>
+                    <table class="transactions-table">
+                        <thead>
+                            <tr>
+                                <th>Descrição</th>
+                                <th>Categoria</th>
+                                <th>Data</th>
+                                <th>Valor</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactions-body">
+                            <!-- Transações serão carregadas aqui pelo JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3>Orçamentos</h3>
+                        <a href="orcamentos.html" class="btn btn-text">Gerenciar</a>
+                    </div>
+                    <div class="budgets-list">
+                        <!-- Orçamentos serão carregados aqui pelo JavaScript -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal de Adicionar Transação -->
+    <div id="transaction-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Adicionar Nova Transação</h2>
+            <form id="transaction-form">
+                <div class="form-group">
+                    <label for="transaction-type">Tipo</label>
+                    <select id="transaction-type" required>
+                        <option value="">Selecione...</option>
+                        <option value="income">Receita</option>
+                        <option value="expense">Despesa</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="transaction-description">Descrição</label>
+                    <input type="text" id="transaction-description" required>
+                </div>
+                <div class="form-group">
+                    <label for="transaction-amount">Valor</label>
+                    <input type="number" id="transaction-amount" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="transaction-category">Categoria</label>
+                    <select id="transaction-category" required>
+                        <option value="">Selecione...</option>
+                        <!-- Categorias carregadas via JS -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="transaction-date">Data</label>
+                    <input type="date" id="transaction-date" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary close-modal" id="cancel-transaction">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar Transação</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
+
