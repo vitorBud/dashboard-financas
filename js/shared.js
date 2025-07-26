@@ -12,17 +12,27 @@ function loadSidebar(activePage) {
             const sidebarPlaceholder = document.getElementById("sidebar-placeholder");
             if (sidebarPlaceholder) {
                 sidebarPlaceholder.innerHTML = data;
-                
-                // Ativar o link correto baseado na página atual
+
+                // Ativar link da página atual
                 if (activePage) {
                     const activeLink = document.querySelector(`.${activePage}-link`);
                     if (activeLink) {
                         activeLink.classList.add("active");
                     }
                 }
-                
-                // Carregar dados do usuário no sidebar
+
+                // Carregar dados do usuário
                 loadUserProfile();
+
+                // 🔥 ADICIONAR FUNCIONALIDADE DO BOTÃO AQUI
+                const toggleBtn = document.getElementById('menu-toggle');
+                const sidebar = document.getElementById('sidebar');
+
+                if (toggleBtn && sidebar) {
+                    toggleBtn.addEventListener('click', () => {
+                        sidebar.classList.toggle('active');
+                    });
+                }
             }
         })
         .catch(error => {

@@ -1,26 +1,58 @@
-<aside class="sidebar">
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sidebar Responsiva</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+</head>
+<body>
+
+  <!-- Botão de menu -->
+  <button id="menu-toggle" class="menu-toggle">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
-        <h1><i class="fas fa-chart-line"></i> Finanças</h1>
+      <h1><i class="fas fa-chart-line"></i> Finanças</h1>
     </div>
     <nav class="sidebar-nav">
-        <ul>
-            <li><a href="index.html" class="dashboard-link"><i class="fas fa-home"></i> Dashboard</a></li>
-            <li><a href="transacoes.html" class="transacoes-link"><i class="fas fa-wallet"></i> Transações</a></li>
-            <li><a href="orcamentos.html" class="orcamentos-link"><i class="fas fa-chart-pie"></i> Orçamentos</a></li>
-            <li><a href="relatorios.html" class="relatorios-link"><i class="fas fa-chart-bar"></i> Relatórios</a></li>
-            <li><a href="categorias.html" class="categorias-link"><i class="fas fa-tags"></i> Categorias</a></li>
-            <li><a href="configuracoes.html" class="configuracoes-link"><i class="fas fa-cog"></i> Configurações</a></li>
-        </ul>
+      <ul>
+        <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+        <li><a href="transacoes.html"><i class="fas fa-wallet"></i> Transações</a></li>
+        <li><a href="orcamentos.html"><i class="fas fa-chart-pie"></i> Orçamentos</a></li>
+        <li><a href="relatorios.html"><i class="fas fa-chart-bar"></i> Relatórios</a></li>
+        <li><a href="categorias.html"><i class="fas fa-tags"></i> Categorias</a></li>
+        <li><a href="configuracoes.html"><i class="fas fa-cog"></i> Configurações</a></li>
+      </ul>
     </nav>
     <div class="sidebar-footer">
-        <div class="user-profile">
-            <img src="image/defaultimg.png" alt="User" class="user-profile-img">
-            <div class="user-info">
-                <span class="user-name">Usuário</span>
-                <span class="user-email">usuario@example.com</span>
-            </div>
-            <i class="fas fa-chevron-down"></i>
+      <div class="user-profile">
+        <img src="image/defaultimg.png" alt="User" class="user-profile-img">
+        <div class="user-info">
+          <span class="user-name">Usuário</span>
+          <span class="user-email">usuario@example.com</span>
         </div>
+      </div>
     </div>
-</aside>
+  </aside>
 
+
+
+  <!-- Script funcional -->
+  <script>
+    const toggleBtn = document.getElementById('menu-toggle');
+    const sidebar = document.getElementById('sidebar');
+
+    toggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
+    });
+  </script>
+
+  <script src="js/shared.js"></script>
+
+</body>
+</html>

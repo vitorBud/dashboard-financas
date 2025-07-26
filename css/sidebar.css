@@ -1,217 +1,132 @@
-/* Sidebar CSS - Completo e Independente */
-
 :root {
-    --primary-color: #4361ee;
-    --primary-light: #e6e9ff;
-    --secondary-color: #3f37c9;
-    --success-color: #4cc9f0;
-    --danger-color: #f72585;
-    --warning-color: #f8961e;
-    --info-color: #4895ef;
-    --light-color: #f8f9fa;
-    --dark-color: #212529;
-    --gray-color: #6c757d;
-    --light-gray: #e9ecef;
-    --white: #ffffff;
-    --sidebar-width: 280px;
-    --header-height: 80px;
-    --card-radius: 12px;
-    --transition: all 0.3s ease;
-}
+      --sidebar-bg: #ffffff;
+      --sidebar-color: #333;
+      --highlight: #000000;
+    }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #ffffffb9;
+    }
 
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f5f7fb;
-    color: var(--dark-color);
-    line-height: 1.6;
-}
-
-/* Sidebar Styles */
-.sidebar {
-    width: var(--sidebar-width);
-    background-color: var(--white);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
-    display: flex;
-    flex-direction: column;
-    transition: var(--transition);
-    z-index: 100;
-    height: 100vh; 
-    position: sticky; 
-    top: 0; 
-}
-
-.sidebar-header {
-    padding: 20px;
-    border-bottom: 1px solid var(--light-gray);
-}
-
-.sidebar-header h1 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--primary-color);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.sidebar-nav {
-    flex: 1;
-    padding: 20px 0;
-    overflow-y: auto; 
-}
-
-.sidebar-nav ul {
-    list-style: none;
-}
-
-.sidebar-nav li {
-    margin-bottom: 5px;
-}
-
-.sidebar-nav li a {
-    display: flex;
-    align-items: center;
-    padding: 12px 20px;
-    color: var(--gray-color);
-    text-decoration: none;
-    transition: var(--transition);
-    gap: 10px;
-}
-
-.sidebar-nav li a:hover {
-    background-color: var(--primary-light);
-    color: var(--primary-color);
-}
-
-.sidebar-nav li.active a {
-    background-color: var(--primary-light);
-    color: var(--primary-color);
-    border-left: 4px solid var(--primary-color);
-}
-
-.sidebar-footer {
-    padding: 20px;
-    border-top: 1px solid var(--light-gray);
-    margin-top: auto; 
-    flex-shrink: 0; 
-}
-
-.user-profile {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    transition: var(--transition);
-    padding: 10px;
-    border-radius: 8px;
-}
-
-.user-profile:hover {
-    background-color: var(--light-gray);
-}
-
-.user-profile img,
-.user-profile-img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    background-color: var(--light-gray);
-}
-
-.user-info {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.user-name {
-    font-weight: 500;
-    font-size: 0.9rem;
-    color: var(--dark-color);
-}
-
-.user-email {
-    font-size: 0.8rem;
-    color: var(--gray-color);
-}
-
-.user-profile i {
-    color: var(--gray-color);
-    font-size: 0.8rem;
-    transition: var(--transition);
-}
-
-.user-profile:hover i {
-    color: var(--primary-color);
-}
-
-/* Responsive Styles */
-@media (max-width: 768px) {
+    /* Sidebar */
     .sidebar {
-        width: 80px;
-        overflow: hidden;
+      width: 250px;
+      background-color: var(--sidebar-bg);
+      color: var(--sidebar-color);
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1rem;
+      transition: left 0.3s ease;
+      z-index: 1000;
     }
-    
-    .sidebar-header h1 span, 
-    .sidebar-nav li a span,
-    .user-info {
-        display: none;
-    }
-    
-    .sidebar-nav li a {
-        justify-content: center;
-        padding: 12px;
-    }
-    
-    .sidebar-footer {
-        padding: 10px;
-    }
-    
-    .user-profile {
-        justify-content: center;
-        padding: 5px;
-    }
-    
-    .user-profile img,
-    .user-profile-img {
-        width: 30px;
-        height: 30px;
-    }
-    
-    .user-profile i {
-        display: none;
-    }
-}
 
-@media (max-width: 576px) {
-    .sidebar {
-        width: 60px;
-    }
-    
-    .sidebar-header {
-        padding: 15px 10px;
-    }
-    
     .sidebar-header h1 {
-        font-size: 1.2rem;
-        justify-content: center;
+      font-size: 1.5rem;
+      color: var(--highlight);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding-top: 3.5rem;;
     }
-    
-    .sidebar-nav li a {
-        padding: 10px;
-    }
-    
-    .user-profile img,
-    .user-profile-img {
-        width: 25px;
-        height: 25px;
-    }
-}
 
+    .sidebar-nav ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar-nav a {
+      color: var(--sidebar-color);
+      text-decoration: none;
+      display: block;
+      padding: 0.8rem;
+      border-radius: 5px;
+      transition: background-color 0.2s;
+    }
+
+    .sidebar-nav a:hover {
+      background-color: #333;
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+    }
+
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .user-profile-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .user-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .user-name {
+      font-weight: bold;
+    }
+
+    .user-email {
+      font-size: 0.8rem;
+      opacity: 0.7;
+    }
+
+    /* Botão hambúrguer */
+    .menu-toggle {
+      display: none;
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      background-color: var(--sidebar-bg);
+      color: rgb(0, 0, 0);
+      border: none;
+      padding: 0.7rem 1rem;
+      font-size: 1.2rem;
+      border-radius: 6px;
+      cursor: pointer;
+      z-index: 1100;
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .sidebar {
+        left: -250px;
+      }
+
+      .sidebar.active {
+        left: 0;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    /* Conteúdo principal de exemplo */
+    .main-content {
+    margin-left: 250px;
+    padding: 2rem;
+    padding-top: 4rem; /* <-- adicionado aqui */
+    transition: margin-left 0.3s ease;
+    }
+
+
+    @media (max-width: 768px) {
+      .main-content {
+        margin-left: 0;
+      }
+    }
